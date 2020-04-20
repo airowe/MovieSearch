@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Main View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="MovieSearch" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" placeholder="Search over half a million movie titles" translatesAutoresizingMaskIntoConstraints="NO" id="GGM-w2-WR9">
+                                <rect key="frame" x="0.0" y="64" width="414" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tmbd" translatesAutoresizingMaskIntoConstraints="NO" id="eWC-mH-kqz">
+                                <rect key="frame" x="114" y="386" width="186" height="134"/>
+                            </imageView>
+                            <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gDC-JK-uBl">
+                                <rect key="frame" x="0.0" y="128" width="414" height="734"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MovieCell" id="mOK-SE-YKQ" customClass="MovieCellViewModel" customModule="MovieSearch" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="210.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mOK-SE-YKQ" id="Qn1-GE-N4b">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="210.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6CP-Gd-Bs8">
+                                                    <rect key="frame" x="0.0" y="5.5" width="133.5" height="200"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="200" id="RC6-Qo-sqS"/>
+                                                        <constraint firstAttribute="width" secondItem="6CP-Gd-Bs8" secondAttribute="height" multiplier="2:3" id="sOr-4u-08z"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Das-q0-s8e">
+                                                    <rect key="frame" x="143.5" y="5" width="270.5" height="205.5"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="250" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cpS-MV-gGK">
+                                                            <rect key="frame" x="0.0" y="0.0" width="270.5" height="51.5"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Overview" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rIv-Ni-3pN">
+                                                            <rect key="frame" x="0.0" y="55.5" width="270.5" height="150"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="cpS-MV-gGK" firstAttribute="height" relation="lessThanOrEqual" secondItem="Das-q0-s8e" secondAttribute="height" multiplier="0.25" id="E2A-DY-01Q"/>
+                                                    </constraints>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="6CP-Gd-Bs8" firstAttribute="height" relation="lessThanOrEqual" secondItem="Qn1-GE-N4b" secondAttribute="height" constant="-10" id="23v-iu-QKz"/>
+                                                <constraint firstItem="6CP-Gd-Bs8" firstAttribute="centerY" secondItem="Qn1-GE-N4b" secondAttribute="centerY" id="5qP-hH-eCP"/>
+                                                <constraint firstItem="6CP-Gd-Bs8" firstAttribute="leading" secondItem="Qn1-GE-N4b" secondAttribute="leading" id="6sG-hN-6U4"/>
+                                                <constraint firstAttribute="trailing" secondItem="Das-q0-s8e" secondAttribute="trailing" id="NOa-eJ-qMg"/>
+                                                <constraint firstItem="Das-q0-s8e" firstAttribute="height" secondItem="Qn1-GE-N4b" secondAttribute="height" constant="-5" id="cDP-ep-NAv"/>
+                                                <constraint firstItem="Das-q0-s8e" firstAttribute="leading" secondItem="6CP-Gd-Bs8" secondAttribute="trailing" constant="10" id="w42-eT-MAN"/>
+                                                <constraint firstItem="Das-q0-s8e" firstAttribute="top" secondItem="Qn1-GE-N4b" secondAttribute="top" constant="5" id="xky-hV-RoY"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="movieOverview" destination="rIv-Ni-3pN" id="HKN-19-FMH"/>
+                                            <outlet property="moviePoster" destination="6CP-Gd-Bs8" id="IRd-Fc-g22"/>
+                                            <outlet property="movieTitle" destination="cpS-MV-gGK" id="Wsi-8A-Ubi"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="gDC-JK-uBl" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="2MM-hU-jye"/>
+                            <constraint firstItem="GGM-w2-WR9" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="5dz-gn-BuA"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="GGM-w2-WR9" secondAttribute="trailing" id="6bZ-K9-Hru"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="gDC-JK-uBl" secondAttribute="bottom" id="9kv-sa-El6"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="gDC-JK-uBl" secondAttribute="trailing" id="H6H-zk-j7h"/>
+                            <constraint firstItem="eWC-mH-kqz" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="JOe-iA-5kK"/>
+                            <constraint firstItem="gDC-JK-uBl" firstAttribute="top" secondItem="GGM-w2-WR9" secondAttribute="bottom" constant="8" id="U1d-aP-6qd"/>
+                            <constraint firstItem="gDC-JK-uBl" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="u1h-ev-jGP"/>
+                            <constraint firstItem="eWC-mH-kqz" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="wHc-su-Z6C"/>
+                            <constraint firstItem="GGM-w2-WR9" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="xAn-Iq-kX0"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="moviesTableView" destination="gDC-JK-uBl" id="rex-yl-ZMc"/>
+                        <outlet property="searchBar" destination="GGM-w2-WR9" id="9Eq-yd-l6Z"/>
+                        <outlet property="tmdbImage" destination="eWC-mH-kqz" id="qYF-m7-htm"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="139" y="134"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="tmbd" width="186" height="134"/>
+    </resources>
+</document>
