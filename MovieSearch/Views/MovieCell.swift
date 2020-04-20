@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MovieCellViewModel: UITableViewCell {
+class MovieCell: UITableViewCell {
     static let identifier = "MovieCell"
 
     @IBOutlet var movieOverview: UILabel!
@@ -16,7 +16,7 @@ class MovieCellViewModel: UITableViewCell {
     @IBOutlet var movieTitle: UILabel!
 
     func configure(with movie: Movie) {
-        guard let posterPath = movie.poster_path else {
+        guard let posterPath = movie.posterPath else {
             return
         }
         

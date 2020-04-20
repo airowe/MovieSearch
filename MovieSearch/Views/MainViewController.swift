@@ -12,6 +12,8 @@ class MainViewController: UIViewController {
     var searchResults: [Movie] = [] {
         didSet {
             DispatchQueue.main.async {
+                self.moviesTableView.setContentOffset(.zero,
+                                                      animated: false)
                 self.showSearchResults(self.searchResults.count > 0)
                 self.moviesTableView.reloadData()
                 self.moviesTableView.setContentOffset(.zero, animated: false)
@@ -46,8 +48,8 @@ class MainViewController: UIViewController {
 
 extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: MovieCellViewModel = tableView.dequeueReusableCell(withIdentifier: MovieCellViewModel.identifier,
-                                                            for: indexPath) as! MovieCellViewModel
+        let cell: MovieCell = tableView.dequeueReusableCell(withIdentifier: MovieCell.identifier,
+                                                            for: indexPath) as! MovieCell
 
         let movie = searchResults[indexPath.row]
         cell.configure(with: movie)
@@ -82,6 +84,8 @@ extension MainViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.isEmpty {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                self.moviesTableView.setContentOffset(.zero,
+                                                      animated: false)
                 self.showSearchResults(false)
             }
         }
