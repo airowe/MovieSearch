@@ -34,7 +34,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="210.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6CP-Gd-Bs8">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cinema" translatesAutoresizingMaskIntoConstraints="NO" id="6CP-Gd-Bs8">
                                                     <rect key="frame" x="0.0" y="5.5" width="133.5" height="200"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="200" id="RC6-Qo-sqS"/>
@@ -108,6 +108,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="cinema" width="511" height="437"/>
         <image name="tmbd" width="186" height="134"/>
     </resources>
 </document>
