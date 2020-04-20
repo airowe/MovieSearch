@@ -12,6 +12,8 @@ class MainViewController: UIViewController {
     var searchResults: [Movie] = [] {
         didSet {
             DispatchQueue.main.async {
+                self.spinnerView.stopAnimating()
+                self.tmdbImage.alpha = 1.0
                 self.moviesTableView.setContentOffset(.zero,
                                                       animated: false)
                 self.showSearchResults(self.searchResults.count > 0)
@@ -20,6 +22,27 @@ class MainViewController: UIViewController {
             }
         }
     }
+
+    lazy var spinnerView:UIActivityIndicatorView = {
+        let spinner = UIActivityIndicatorView(style: .gray)
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+
+        if #available(iOS 13.0, *) {
+            spinner.backgroundColor = .systemBackground
+        } else {
+            spinner.backgroundColor = .white
+        }
+
+        spinner.heightAnchor.constraint(equalToConstant: 150).isActive = true
+        spinner.widthAnchor.constraint(equalToConstant: 150).isActive = true
+
+        view.addSubview(spinner)
+
+        spinner.centerXAnchor.constraint(equalTo: tmdbImage.centerXAnchor).isActive = true
+        spinner.centerYAnchor.constraint(equalTo: tmdbImage.centerYAnchor).isActive = true
+
+        return spinner
+    }()
 
     let queryService = QueryService()
 
@@ -69,6 +92,9 @@ extension MainViewController: UISearchBarDelegate {
         guard let searchText = searchBar.text, !searchText.isEmpty else {
             return
         }
+
+        spinnerView.startAnimating()
+        tmdbImage.isHidden = true
 
         queryService.request(.search(matching: searchText)) { result in
             switch result {

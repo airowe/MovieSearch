@@ -16,13 +16,9 @@ class MovieCell: UITableViewCell {
     @IBOutlet var movieTitle: UILabel!
 
     func configure(with movie: Movie) {
-        guard let posterPath = movie.posterPath else {
-            return
-        }
-        
         movieTitle.text = movie.title
         movieOverview.text = movie.overview
-        moviePoster.loadImage(urlString: APIConfig.posterUrl + posterPath)
+        moviePoster.loadImage(urlString: APIConfig.posterUrl + movie.posterPath)
     }
 
     override func layoutSubviews() {
