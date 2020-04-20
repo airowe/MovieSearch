@@ -13,7 +13,6 @@ class MainViewController: UIViewController {
         didSet {
             DispatchQueue.main.async {
                 self.spinnerView.stopAnimating()
-                self.tmdbImage.alpha = 1.0
                 self.moviesTableView.setContentOffset(.zero,
                                                       animated: false)
                 self.showSearchResults(self.searchResults.count > 0)
@@ -24,17 +23,13 @@ class MainViewController: UIViewController {
     }
 
     lazy var spinnerView:UIActivityIndicatorView = {
-        let spinner = UIActivityIndicatorView(style: .gray)
+        let spinner = UIActivityIndicatorView(style: .medium)
         spinner.translatesAutoresizingMaskIntoConstraints = false
 
-        if #available(iOS 13.0, *) {
-            spinner.backgroundColor = .systemBackground
-        } else {
-            spinner.backgroundColor = .white
-        }
+        spinner.backgroundColor = .systemBackground
 
-        spinner.heightAnchor.constraint(equalToConstant: 150).isActive = true
-        spinner.widthAnchor.constraint(equalToConstant: 150).isActive = true
+        spinner.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        spinner.widthAnchor.constraint(equalToConstant: 200).isActive = true
 
         view.addSubview(spinner)
 
@@ -59,7 +54,7 @@ class MainViewController: UIViewController {
 
     private func convertResponseToMovies(_ data: Data) -> [Movie] {
         if let decodedResponse = try? JSONDecoder().decode(Response.self, from: data) {
-            return decodedResponse.results
+            return decodedResponse.results.filter{ $0.posterPath != nil }
         } else { return [] }
     }
 

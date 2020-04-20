@@ -9,7 +9,7 @@
 struct Movie {
     let id: Int
     let title: String
-    let posterPath: String
+    let posterPath: String?
     let overview: String
 }
 
