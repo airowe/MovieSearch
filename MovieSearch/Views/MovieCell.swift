@@ -31,4 +31,10 @@ class MovieCell: UITableViewCell {
         movieTitle.sizeToFit()
         movieOverview.sizeToFit()
     }
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+
+        moviePoster.image = nil
+    }
 }

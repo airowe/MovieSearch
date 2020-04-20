@@ -14,7 +14,7 @@ extension UIImageView {
   func loadImage(urlString: String){
     let url = URL(string: urlString)
 
-    image = nil
+    image = UIImage(named: "AppIcon")
 
     if let imageFromCache = imageCache.object(forKey: urlString as AnyObject) as? UIImage {
         self.image = imageFromCache

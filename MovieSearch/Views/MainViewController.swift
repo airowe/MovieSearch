@@ -28,8 +28,8 @@ class MainViewController: UIViewController {
 
         spinner.backgroundColor = .systemBackground
 
-        spinner.heightAnchor.constraint(equalToConstant: 200).isActive = true
-        spinner.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        spinner.heightAnchor.constraint(equalToConstant: 300).isActive = true
+        spinner.widthAnchor.constraint(equalToConstant: 300).isActive = true
 
         view.addSubview(spinner)
 
