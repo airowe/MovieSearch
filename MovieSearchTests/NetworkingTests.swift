@@ -31,73 +31,69 @@ class NetworkingTests: XCTestCase {
         } else { return [] }
     }
 
+    private func searchMovies(for searchText: String,
+                              then responseHandler: @escaping ([Movie]) -> Void) {
+
+        queryService.request(.search(matching: searchText)) { result in
+            switch result {
+                case .failure(let error):
+                    print("Search error: \(error.localizedDescription)")
+                    responseHandler([Movie]())
+                case .success(let response):
+                    responseHandler(self.convertResponseToMovies(response))
+            }
+        }
+
+    }
+
     func testInvalidQueryReturnsNoResults() {
         let searchText = "@"
 
         let expectation = self.expectation(description: "EmptyResults")
 
-        var searchResults:[Movie] = []
+        var movies = [Movie]()
 
-        queryService.request(.search(matching: searchText)) { result in
-            switch result {
-                case .failure(let error):
-                    print("Search error: \(error.localizedDescription)")
-                    searchResults.removeAll()
-                    expectation.fulfill()
-                case .success(let response):
-                    searchResults = self.convertResponseToMovies(response)
-                    expectation.fulfill()
-            }
+        searchMovies(for: searchText) { response in
+            movies = response
+
+            expectation.fulfill()
         }
 
         self.waitForExpectations(timeout: 5, handler: nil)
-        XCTAssertEqual(searchResults.count, 0)
+        XCTAssertEqual(movies.count, 0)
     }
 
     func testValidQueryReturnsResults() {
         let searchText = "Big"
-
         let expectation = self.expectation(description: "Results")
 
-        var searchResults:[Movie] = []
+        var movies = [Movie]()
 
-        queryService.request(.search(matching: searchText)) { result in
-            switch result {
-                case .failure(let error):
-                    print("Search error: \(error.localizedDescription)")
-                    searchResults.removeAll()
-                    expectation.fulfill()
-                case .success(let response):
-                    searchResults = self.convertResponseToMovies(response)
-                    expectation.fulfill()
-            }
+        searchMovies(for: searchText) { response in
+            movies = response
+
+            expectation.fulfill()
         }
 
         self.waitForExpectations(timeout: 5, handler: nil)
-        XCTAssertGreaterThanOrEqual(searchResults.count, 0)
+        XCTAssertGreaterThanOrEqual(movies.count, 0)
     }
 
     func testValidQueryHasSearchTermInAtLeastOneTitle() {
         let searchText = "Big"
         let expectation = self.expectation(description: "AtLeastOneResult")
 
-        var searchResults:[Movie] = []
+        var movies = [Movie]()
 
-        queryService.request(.search(matching: searchText)) { result in
-            switch result {
-                case .failure(let error):
-                    print("Search error: \(error.localizedDescription)")
-                    searchResults.removeAll()
-                    expectation.fulfill()
-                case .success(let response):
-                    searchResults = self.convertResponseToMovies(response)
-                    expectation.fulfill()
-            }
+        searchMovies(for: searchText) { response in
+            movies = response
+
+            expectation.fulfill()
         }
 
         self.waitForExpectations(timeout: 5, handler: nil)
 
-        let firstMovieWithTitle = searchResults.first{ $0.title.contains(searchText) }
+        let firstMovieWithTitle = movies.first{ $0.title.contains(searchText) }
 
         XCTAssertNotNil(firstMovieWithTitle, "No movies with title \(searchText)")
     }
