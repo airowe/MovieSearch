@@ -10,9 +10,9 @@ import Foundation
 
 class QueryService {
     func request(_ endpoint: Endpoint,
-                 then handler: @escaping (QueryResult) -> Void) {
+                 then responseHandler: @escaping (QueryResult) -> Void) {
         guard let url = endpoint.url else {
-            return handler(.failure(NetworkingError.invalidURL))
+            return responseHandler(.failure(NetworkingError.invalidURL))
         }
 
         let task = NetworkClient.session.dataTask(with: url) {
@@ -21,7 +21,7 @@ class QueryService {
             let result = data.map(QueryResult.success) ??
                         .failure(NetworkingError.network(error))
 
-            handler(result)
+            responseHandler(result)
         }
 
         task.resume()

@@ -13,8 +13,6 @@ class MainViewController: UIViewController {
         didSet {
             DispatchQueue.main.async {
                 self.spinnerView.stopAnimating()
-                self.moviesTableView.setContentOffset(.zero,
-                                                      animated: false)
                 self.showSearchResults(self.searchResults.count > 0)
                 self.moviesTableView.reloadData()
                 self.moviesTableView.setContentOffset(.zero, animated: false)
@@ -23,13 +21,10 @@ class MainViewController: UIViewController {
     }
 
     lazy var spinnerView:UIActivityIndicatorView = {
-        let spinner = UIActivityIndicatorView(style: .medium)
+        let spinner = UIActivityIndicatorView(style: .large)
         spinner.translatesAutoresizingMaskIntoConstraints = false
 
         spinner.backgroundColor = .systemBackground
-
-        spinner.heightAnchor.constraint(equalToConstant: 300).isActive = true
-        spinner.widthAnchor.constraint(equalToConstant: 300).isActive = true
 
         view.addSubview(spinner)
 
@@ -59,8 +54,10 @@ class MainViewController: UIViewController {
     }
 
     private func showSearchResults(_ isHidden: Bool) {
-        tmdbImage.isHiddenWithAnimation(isHidden)
-        moviesTableView.isHiddenWithAnimation(!isHidden)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            self.tmdbImage.isHiddenWithAnimation(isHidden)
+            self.moviesTableView.isHiddenWithAnimation(!isHidden)
+        }
     }
 }
 

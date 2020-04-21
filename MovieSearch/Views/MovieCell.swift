@@ -15,6 +15,8 @@ class MovieCell: UITableViewCell {
     @IBOutlet var moviePoster: UIImageView!
     @IBOutlet var movieTitle: UILabel!
 
+    private var task: URLSessionDataTask?
+
     func configure(with movie: Movie) {
         guard let posterPath = movie.posterPath else {
             return
@@ -22,18 +24,17 @@ class MovieCell: UITableViewCell {
 
         movieTitle.text = movie.title
         movieOverview.text = movie.overview
-        moviePoster.loadImage(urlString: APIConfig.posterUrl + posterPath)
-    }
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        contentView.layoutIfNeeded()
-        movieTitle.sizeToFit()
-        movieOverview.sizeToFit()
+        if task == nil {
+            task = moviePoster.loadImage(urlString: APIConfig.posterUrl + posterPath)
+        }
     }
 
     override func prepareForReuse() {
         super.prepareForReuse()
+
+        task?.cancel()
+        task = nil
 
         moviePoster.image = nil
     }

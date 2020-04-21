@@ -11,7 +11,7 @@ import UIKit
 extension UIView {
 
     func isHiddenWithAnimation(_ hidden: Bool) {
-        UIView.transition(with: self, duration: 0.5, options: .transitionCrossDissolve, animations: {
+        UIView.transition(with: self, duration: 0.6, options: .transitionCrossDissolve, animations: {
             self.isHidden = hidden
         })
     }
