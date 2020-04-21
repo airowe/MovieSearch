@@ -84,12 +84,6 @@ class MainViewController: UIViewController {
         moviesTableView.delegate = self
     }
 
-    private func convertResponseToMovies(_ data: Data) -> [Movie] {
-        if let decodedResponse = try? JSONDecoder().decode(Response.self, from: data) {
-            return decodedResponse.results.filter{ $0.posterPath != nil }
-        } else { return [] }
-    }
-
     private func showSearchResults(_ isHidden: Bool) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             self.movieSearchImage.isHiddenWithAnimation(isHidden)
@@ -149,7 +143,7 @@ extension MainViewController: UISearchBarDelegate {
                     print("Search error: \(error.localizedDescription)")
                     self.searchResults.removeAll()
                 case .success(let response):
-                    self.searchResults = self.convertResponseToMovies(response)
+                    self.searchResults = Util.convertResponseToMovies(response)
             }
         }
     }

@@ -19,7 +19,7 @@ class QueryService {
         }
 
         let task = NetworkClient.session.dataTask(with: url) {
-            data, _, error in
+            data, response, error in
 
             let result = data.map(QueryResult.success) ??
                         .failure(NetworkingError.network(error))

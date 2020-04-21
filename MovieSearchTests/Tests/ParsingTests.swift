@@ -10,17 +10,21 @@ import XCTest
 @testable import MovieSearch
 
 class ParsingTests: XCTestCase {
-    func testMovieCanBeParsedFromCorrectData() throws {
+    private func parseMovie(_ filename: String) throws -> Movie? {
         let bundle = Bundle(for: type(of: self))
-
-        guard let url = bundle.url(forResource: "Movie", withExtension: "json") else {
+        guard let url = bundle.url(forResource: filename, withExtension: "json") else {
             XCTFail("Missing file: Movie.json")
-            return
+            return nil
         }
 
         let json = try Data(contentsOf: url)
-
         let movie = try? JSONDecoder().decode(Movie.self, from: json)
+
+        return movie
+    }
+
+    func testMovieCanBeParsedFromCorrectData() throws {
+        let movie = try? parseMovie("Movie")
 
         XCTAssertEqual(movie!.id, 343611)
         XCTAssertEqual(movie!.posterPath, "/IfB9hy4JH1eH6HEfIgIGORXi5h.jpg")
@@ -29,16 +33,7 @@ class ParsingTests: XCTestCase {
     }
 
     func testMovieCantBeParsedFromIncorrectData() throws {
-        let bundle = Bundle(for: type(of: self))
-
-        guard let url = bundle.url(forResource: "MalformattedMovie", withExtension: "json") else {
-            XCTFail("Missing file: MalformattedMovie.json")
-            return
-        }
-
-        let json = try Data(contentsOf: url)
-
-        let movie = try? JSONDecoder().decode(Movie.self, from: json)
+        let movie = try? parseMovie("MalformattedMovie")
 
         XCTAssertNil(movie, "Malformatted Movie file")
     }

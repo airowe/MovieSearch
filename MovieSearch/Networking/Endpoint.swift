@@ -14,7 +14,7 @@ private enum RequestType {
     case search
 }
 
-struct Endpoint {
+public struct Endpoint {
     static let apiKey = "example_api_key"
     let path: String
     var queryItems: [URLQueryItem]? = [URLQueryItem]()

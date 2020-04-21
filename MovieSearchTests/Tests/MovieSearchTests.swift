@@ -25,25 +25,17 @@ class MovieSearchTests: XCTestCase {
         queryService = nil
     }
 
-    private func convertResponseToMovies(_ data: Data) -> [Movie] {
-        if let decodedResponse = try? JSONDecoder().decode(Response.self, from: data) {
-            return decodedResponse.results.filter{ $0.posterPath != nil }
-        } else { return [] }
-    }
-
     private func searchMovies(for searchText: String,
                               then responseHandler: @escaping ([Movie]) -> Void) {
-
-        queryService.request(.search(matching: searchText)) { result, _ in
+        queryService.request(.search(matching: searchText)) { result in
             switch result {
                 case .failure(let error):
                     print("Search error: \(error.localizedDescription)")
                     responseHandler([Movie]())
                 case .success(let response):
-                    responseHandler(self.convertResponseToMovies(response))
+                    responseHandler(Util.convertResponseToMovies(response))
             }
         }
-
     }
 
     func testInvalidQueryReturnsNoResults() {
