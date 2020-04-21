@@ -9,23 +9,26 @@
 import Foundation
 
 class QueryService {
+
+    @discardableResult
     func request(_ endpoint: Endpoint,
-                 then responseHandler: @escaping (QueryResult, URLSessionDataTask?) -> Void) {
+                 then responseHandler: @escaping (QueryResult) -> Void) -> URLSessionDataTask? {
         guard let url = endpoint.url else {
-            return responseHandler(.failure(NetworkingError.invalidURL), nil)
+            responseHandler(.failure(NetworkingError.invalidURL))
+            return nil
         }
 
-        var task: URLSessionDataTask?
-
-        task = NetworkClient.session.dataTask(with: url) {
+        let task = NetworkClient.session.dataTask(with: url) {
             data, _, error in
 
             let result = data.map(QueryResult.success) ??
                         .failure(NetworkingError.network(error))
 
-            responseHandler(result, task)
+            responseHandler(result)
         }
 
-        task?.resume()
+        task.resume()
+
+        return task
     }
 }

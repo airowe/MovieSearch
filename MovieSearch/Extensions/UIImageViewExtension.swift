@@ -12,31 +12,32 @@ let imageCache = NSCache<AnyObject, AnyObject>()
 
 extension UIImageView {
 
-    func loadImage(urlString: String) -> URLSessionDataTask? {
+    func loadImage(path: String) -> URLSessionDataTask? {
 
-        if let imageFromCache = imageCache.object(forKey: urlString as AnyObject) as? UIImage {
+        if let imageFromCache = imageCache.object(forKey: path as AnyObject) as? UIImage {
             self.image = imageFromCache
-            return nil
-        }
-
-        guard let url = URL(string: urlString) else {
             return nil
         }
 
         image = UIImage(named: "placeholder")
 
-        let task = URLSession.shared.dataTask(with: url) { [weak self]
-            data, _, error in
+        let queryService = QueryService()
 
-            DispatchQueue.main.async {
-                if let data = data, let imageToCache = UIImage(data: data) {
-                    imageCache.setObject(imageToCache, forKey: urlString as NSString)
-                    self?.image = imageToCache
-                }
+        let task = queryService.request(.image(at: path)) { result in
+            switch result {
+                case .failure:
+                    return
+                case .success(let response):
+                    if let imageToCache = UIImage(data: response) {
+                        imageCache.setObject(imageToCache, forKey: path as NSString)
+                        DispatchQueue.main.async {
+                            self.image = imageToCache
+                        }
+                    }
             }
         }
 
-        task.resume()
+        task?.resume()
 
         return task
     }

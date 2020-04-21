@@ -26,7 +26,7 @@ class MovieCell: UITableViewCell {
         movieOverview.text = movie.overview
 
         if task == nil {
-            task = moviePoster.loadImage(urlString: APIConfig.posterUrl + posterPath)
+            task = moviePoster.loadImage(path: posterPath)
         }
     }
 
