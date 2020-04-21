@@ -9,6 +9,9 @@
 import UIKit
 
 class MainViewController: UIViewController {
+
+    let queryService = QueryService()
+
     var searchResults: [Movie] = [] {
         didSet {
             DispatchQueue.main.async {
@@ -23,7 +26,6 @@ class MainViewController: UIViewController {
     lazy var spinnerView:UIActivityIndicatorView = {
         let spinner = UIActivityIndicatorView(style: .large)
         spinner.translatesAutoresizingMaskIntoConstraints = false
-
         spinner.backgroundColor = .systemBackground
 
         view.addSubview(spinner)
@@ -33,8 +35,6 @@ class MainViewController: UIViewController {
 
         return spinner
     }()
-
-    let queryService = QueryService()
 
     @IBOutlet var moviesTableView: UITableView!
     @IBOutlet var searchBar: UISearchBar!
