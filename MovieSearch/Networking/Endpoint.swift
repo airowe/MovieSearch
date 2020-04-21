@@ -9,29 +9,53 @@
 import Foundation
 import UIKit
 
+private enum RequestType {
+    case image
+    case search
+}
+
 struct Endpoint {
+    static let apiKey = "example_api_key"
     let path: String
-    let queryItems: [URLQueryItem]
+    var queryItems: [URLQueryItem]? = [URLQueryItem]()
+    private var type: RequestType
+
+    var url: URL? {
+        switch type {
+            case .image:
+                var components = URLComponents()
+                components.scheme = "https"
+                components.host = "image.tmdb.org"
+                components.path = path
+                return components.url
+
+            case .search:
+                var components = URLComponents()
+                components.scheme = "https"
+                components.host = "api.themoviedb.org"
+                components.path = path
+                components.queryItems = queryItems
+                return components.url
+        }
+    }
 }
 
 extension Endpoint {
+    static func image(at path: String) -> Endpoint {
+        return Endpoint(
+            path: "/t/p/w600_and_h900_bestv2\(path)",
+            type: .image
+        )
+    }
+
     static func search(matching query: String) -> Endpoint {
         return Endpoint(
             path: "/3/search/movie",
             queryItems: [
-                URLQueryItem(name: "api_key", value: APIConfig.apiKey),
+                URLQueryItem(name: "api_key", value: apiKey),
                 URLQueryItem(name: "query", value: query)
-            ]
+            ],
+            type: .search
         )
-    }
-
-    var url: URL? {
-        var components = URLComponents()
-        components.scheme = "https"
-        components.host = "api.themoviedb.org"
-        components.path = path
-        components.queryItems = queryItems
-
-        return components.url
     }
 }

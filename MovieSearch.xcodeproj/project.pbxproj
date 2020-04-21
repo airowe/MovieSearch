@@ -11,7 +11,8 @@
 		66B165AF244E46AE00CC10E4 /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B165AE244E46AE00CC10E4 /* NetworkClient.swift */; };
 		66B165B1244E5E3000CC10E4 /* Movie.json in Resources */ = {isa = PBXBuildFile; fileRef = 66B165B0244E5E3000CC10E4 /* Movie.json */; };
 		66B165B3244F20DE00CC10E4 /* MalformattedMovie.json in Resources */ = {isa = PBXBuildFile; fileRef = 66B165B2244F20DE00CC10E4 /* MalformattedMovie.json */; };
-		66C2B9E7244F255400FC126A /* NetworkingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C2B9E6244F255400FC126A /* NetworkingTests.swift */; };
+		66C2B9E7244F255400FC126A /* MovieSearchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C2B9E6244F255400FC126A /* MovieSearchTests.swift */; };
+		66C2B9E9244F416600FC126A /* ImageSearchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C2B9E8244F416600FC126A /* ImageSearchTests.swift */; };
 		66FD3930244B88EB006AC1F1 /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FD392F244B88EB006AC1F1 /* MovieCell.swift */; };
 		66FD3933244B92DA006AC1F1 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FD3932244B92DA006AC1F1 /* UIImageViewExtension.swift */; };
 		66FD3935244DC573006AC1F1 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FD3934244DC573006AC1F1 /* UIViewExtension.swift */; };
@@ -45,7 +46,8 @@
 		66B165AE244E46AE00CC10E4 /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
 		66B165B0244E5E3000CC10E4 /* Movie.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Movie.json; sourceTree = "<group>"; };
 		66B165B2244F20DE00CC10E4 /* MalformattedMovie.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MalformattedMovie.json; sourceTree = "<group>"; };
-		66C2B9E6244F255400FC126A /* NetworkingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingTests.swift; sourceTree = "<group>"; };
+		66C2B9E6244F255400FC126A /* MovieSearchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSearchTests.swift; sourceTree = "<group>"; };
+		66C2B9E8244F416600FC126A /* ImageSearchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSearchTests.swift; sourceTree = "<group>"; };
 		66FD392F244B88EB006AC1F1 /* MovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
 		66FD3932244B92DA006AC1F1 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
 		66FD3934244DC573006AC1F1 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
@@ -135,7 +137,8 @@
 				66FED658244A344500065A82 /* Info.plist */,
 				66B165B0244E5E3000CC10E4 /* Movie.json */,
 				66B165B2244F20DE00CC10E4 /* MalformattedMovie.json */,
-				66C2B9E6244F255400FC126A /* NetworkingTests.swift */,
+				66C2B9E6244F255400FC126A /* MovieSearchTests.swift */,
+				66C2B9E8244F416600FC126A /* ImageSearchTests.swift */,
 			);
 			path = MovieSearchTests;
 			sourceTree = "<group>";
@@ -298,7 +301,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				66FED657244A344500065A82 /* ParsingTests.swift in Sources */,
-				66C2B9E7244F255400FC126A /* NetworkingTests.swift in Sources */,
+				66C2B9E7244F255400FC126A /* MovieSearchTests.swift in Sources */,
+				66C2B9E9244F416600FC126A /* ImageSearchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -88,7 +88,7 @@ extension MainViewController: UISearchBarDelegate {
         spinnerView.startAnimating()
         tmdbImage.isHidden = true
 
-        queryService.request(.search(matching: searchText)) { result in
+        queryService.request(.search(matching: searchText)) { result, _ in
             switch result {
                 case .failure(let error):
                     print("Search error: \(error.localizedDescription)")

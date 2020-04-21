@@ -1,5 +1,5 @@
 //
-//  NetworkingTests.swift
+//  MovieSearchTests.swift
 //  MovieSearchTests
 //
 //  Created by Adam Rowe on 4/21/20.
@@ -9,7 +9,7 @@
 import XCTest
 @testable import MovieSearch
 
-class NetworkingTests: XCTestCase {
+class MovieSearchTests: XCTestCase {
 
     private var queryService: QueryService!
 
@@ -34,7 +34,7 @@ class NetworkingTests: XCTestCase {
     private func searchMovies(for searchText: String,
                               then responseHandler: @escaping ([Movie]) -> Void) {
 
-        queryService.request(.search(matching: searchText)) { result in
+        queryService.request(.search(matching: searchText)) { result, _ in
             switch result {
                 case .failure(let error):
                     print("Search error: \(error.localizedDescription)")
@@ -93,7 +93,7 @@ class NetworkingTests: XCTestCase {
 
         self.waitForExpectations(timeout: 5, handler: nil)
 
-        let firstMovieWithTitle = movies.first{ $0.title.contains(searchText) }
+        let firstMovieWithTitle = movies.firstIndex{ $0.title.contains(searchText) }
 
         XCTAssertNotNil(firstMovieWithTitle, "No movies with title \(searchText)")
     }
