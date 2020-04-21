@@ -23,7 +23,7 @@ extension UIImageView {
             return nil
         }
 
-        image = UIImage(named: "AppIcon")
+        image = UIImage(named: "placeholder")
 
         let task = URLSession.shared.dataTask(with: url) { [weak self]
             data, _, error in
