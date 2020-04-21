@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "placeholder.png",
+      "filename" : "movie-search@1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "placeholder@2x.png",
+      "filename" : "movie-search@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "placeholder@3x.png",
+      "filename" : "movie-search@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
@@ -19,8 +19,5 @@
   "info" : {
     "author" : "xcode",
     "version" : 1
-  },
-  "properties" : {
-    "preserves-vector-representation" : true
   }
 }
