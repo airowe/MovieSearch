@@ -15,7 +15,7 @@ private enum RequestType {
 }
 
 public struct Endpoint {
-    static let apiKey = "example_api_key"
+    static let apiKey = ProcessInfo.processInfo.environment["api_key"]
     let path: String
     var queryItems: [URLQueryItem]? = [URLQueryItem]()
     private var type: RequestType
