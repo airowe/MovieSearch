@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CustomFooterView: UIStackView {
+class CustomFooterView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -16,27 +16,41 @@ class CustomFooterView: UIStackView {
         commonInit()
     }
 
-    required init(coder: NSCoder) {
+    required init?(coder: NSCoder) {
         super.init(coder: coder)
 
         commonInit()
     }
 
     private func commonInit() {
-        self.axis = .horizontal
-        self.spacing = 8
+        containerStackView.addArrangedSubview(footerImageView)
+        containerStackView.addArrangedSubview(footerLabel)
 
-        addArrangedSubview(footerImageView)
-        addArrangedSubview(footerLabel)
-
-        footerImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8).isActive = true
-        footerLabel.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        footerImageView.leadingAnchor.constraint(equalTo: containerStackView.leadingAnchor).isActive = true
+        footerLabel.trailingAnchor.constraint(equalTo: containerStackView.trailingAnchor).isActive = true
     }
+
+    lazy var containerStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 8
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+
+        self.addSubview(stackView)
+
+        stackView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8.0).isActive = true
+        stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8.0).isActive = true
+
+        stackView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+
+        return stackView
+    }()
 
     lazy var footerImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "tmdb"))
         imageView.contentMode = .scaleAspectFit
-        imageView.translatesAutoresizingMaskIntoConstraints = false
 
         imageView.heightAnchor.constraint(equalToConstant: 36.0).isActive = true
         imageView.widthAnchor.constraint(equalToConstant: 36.0).isActive = true
@@ -51,6 +65,7 @@ class CustomFooterView: UIStackView {
         label.adjustsFontSizeToFitWidth = true
         label.font = UIFont.systemFont(ofSize: 10, weight: UIFont.Weight.thin)
         label.textAlignment = .justified
+        label.translatesAutoresizingMaskIntoConstraints = false
 
         return label
     }()

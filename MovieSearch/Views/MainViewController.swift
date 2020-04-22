@@ -24,9 +24,7 @@ class MainViewController: UIViewController {
     }
 
     lazy var footerView: CustomFooterView = {
-        let footerView = CustomFooterView()
-        footerView.widthAnchor.constraint(equalToConstant: moviesTableView.bounds.width - 16).isActive = true
-        return footerView
+        return CustomFooterView()
     }()
 
     lazy var spinnerView: UIActivityIndicatorView = {
@@ -94,7 +92,7 @@ extension MainViewController: UITableViewDataSource {
 
 extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 60.0
+        return 36.0
     }
 
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
