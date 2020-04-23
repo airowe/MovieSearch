@@ -62,8 +62,8 @@
       </BuildableProductRunnable>
       <EnvironmentVariables>
          <EnvironmentVariable
-            key = "OS_ACTIVITY_MODE"
-            value = "disable"
+            key = "api_key"
+            value = "example_api_key"
             isEnabled = "YES">
          </EnvironmentVariable>
       </EnvironmentVariables>
